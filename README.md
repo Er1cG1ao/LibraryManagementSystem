@@ -4,16 +4,16 @@ my code:
 /**
  * LibraryManagementSystem
  * @description
- * This is a console-based Java written Library Management System designed to help libraries manage their book inventory efficiently. 
- * It allows users to record, sort, borrow, search, remove, and analyze books. 
- * The program uses 2D arrays to store book details, including the book’s name, author, year of publication, stock, and borrowed count.
+ * This is a CLI based library management system designed to help libraries manage their book inventory efficiently. 
+ * This program allows users to add, sort, borrow, search, remove books. 
+ * This program uses 2D arrays to store book details: book’s name, author, year of publication, stock, and borrowed count.
  * @author Er1cG1ao
  * @version 1.0.0
  */
 import java.util.Scanner; //importing scanner class
 public class LibraryManagementSystem
 {
-    private static String[][] nameAndAuthor;
+    private static String[][] nameAndAuthor;//using class level static variables so all function can access them.
     private static int[][] publishStockBorrow;
     private static int tableWidth=40;
     public static void main(String args[])
@@ -23,9 +23,9 @@ public class LibraryManagementSystem
         System.out.println("LibraryManagementSystem");
         System.out.println("Version: 1.0.0");
         System.out.println("Author: Er1cG1ao");
-        System.out.println("Program description: This is a console-based Java written Library Management System designed to help libraries manage their book inventory efficiently. ");
-        System.out.println("It allows users to record, sort, borrow, search, remove, and analyze books. ");
-        System.out.println("The program uses 2D arrays to store book details, including the book’s name, author, year of publication, stock, and borrowed count.");
+        System.out.println("This is a CLI based library management system designed to help libraries manage their book inventory efficiently. ");
+        System.out.println("This program allows users to add, sort, borrow, search, remove books. ");
+        System.out.println("This program uses 2D arrays to store book details: book’s name, author, year of publication, stock, and borrowed count.");
         System.out.println("----------------------------");
         System.out.println("\nYou will now be asked to initialize the bookshelf");
         initializeBookArray();
