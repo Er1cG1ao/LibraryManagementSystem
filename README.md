@@ -31,7 +31,11 @@ public class LibraryManagementSystem
         initializeBookArray();
     }
 
-    /* initialize array */
+    /** initialize array 
+     * ask for how much book to add
+     * name, author, year and stock
+     * call the showBookshelf function.
+    */
     public static void initializeBookArray()
     {
         Scanner input=new Scanner(System.in);
@@ -76,7 +80,12 @@ public class LibraryManagementSystem
         showMenu();
     }
 
-    /* add books */
+    /** 
+     * add books 
+     * use both arrays
+     * use resize method
+     * output the new array by editing on the static variables
+    */
     public static void addBooks() {
         Scanner input = new Scanner(System.in);
         boolean addingBooks = true;
@@ -165,7 +174,12 @@ public class LibraryManagementSystem
         showBookshelf(nameAndAuthor, publishStockBorrow);
     }
 
-    /* Removing books  */
+    /** 
+     * Removing books  
+     * use both arrays
+     * resize arrays 
+     * output by editing on static arrays
+    */
     public static void removeBooks() {
         Scanner input = new Scanner(System.in);
         boolean removingBooks = true;
@@ -239,7 +253,11 @@ public class LibraryManagementSystem
         showBookshelf(nameAndAuthor, publishStockBorrow);
     }
 
-    /* Sorting Controller */
+    /**
+     * Sorting Controller 
+     * decides which sorting function to use
+     * ask for user input then calls one of the three sorting functions.
+    */
     public static void sortBooks() {
         Scanner input = new Scanner(System.in);
         boolean sorted = false;
@@ -278,7 +296,12 @@ public class LibraryManagementSystem
         showBookshelf(nameAndAuthor, publishStockBorrow);//show the updated bookshelf
     }
 
-    /* Bubble Sort based on String (for sorting by Name) */
+    /**
+     * Bubble Sort based on String (for sorting by Name) 
+     * use both arrays
+     * sort alphabetically
+     * sort base on string array but also edit int array
+    */
     public static void sortStringBubble(String[][] nameAndAuthor, int[][] publishStockBorrow, int indexOfSortBase) {
         int n = nameAndAuthor.length; // Number of books (rows)
         for (int i = 0; i < n - 1; i++) {
@@ -298,7 +321,12 @@ public class LibraryManagementSystem
         }
     }
 
-    /* Ascending Bubble Sort for Integers (for sorting by Year/Stock) */
+    /**
+     * Ascending Bubble Sort for Integers (for sorting by Year/Stock) 
+     * sort base on int array
+     * can be used for both stock and year, depending on user choice
+     * alters between stock and year by having different indexOfSortBase
+    */
     public static void sortAscIntBubble(String[][] nameAndAuthor, int[][] publishStockBorrow, int indexOfSortBase) {
         int n = publishStockBorrow.length; // Number of books (rows)
         for (int i = 0; i < n - 1; i++) {
@@ -327,7 +355,10 @@ public class LibraryManagementSystem
         }
     }
 
-    /* Descending Bubble Sort for Integers (for sorting by Year/Stock) */
+    /** 
+     * Descending Bubble Sort for Integers (for sorting by Year/Stock) 
+     * same as sortAscIntBubble, but this one is descending order.
+    */
     public static void sortDesIntBubble(String[][] nameAndAuthor, int[][] publishStockBorrow, int indexOfSortBase) {
         int n = publishStockBorrow.length; // Number of books (rows)
         for (int i = 0; i < n - 1; i++) {
@@ -355,7 +386,11 @@ public class LibraryManagementSystem
             }
         }
     }
-    /* show book shelf */
+    /**
+     * show book shelf 
+     * find max column length for each column by going through the arrays
+     * then use printf to printout the table.
+    */
     public static void showBookshelf(String[][] nameAndAuthor, int[][] publishStockBorrow) {
         int[] columnLengths = new int[5];//array for storing lengths of each columns
         for (int col = 0; col < 2; col++) { // Calculate max length for Name and Author columns
@@ -394,29 +429,35 @@ public class LibraryManagementSystem
         columnLengths[3] = Math.max(columnLengths[3], "Stock".length());
         columnLengths[4] = Math.max(columnLengths[4], "Borrowed".length());
 
-        int nameColLength = columnLengths[0];
+        int nameColLength = columnLengths[0];//just for easier dev
         int authorColLength = columnLengths[1];
         int yearColLength = columnLengths[2];
         int stockColLength = columnLengths[3];
         int borrowColLength = columnLengths[4];
-
-        // Calculate the total table width
+ 
+        //find the total table width
         tableWidth = nameColLength + authorColLength + yearColLength + stockColLength + borrowColLength + 16;
-        // Print top border
+        //print top border
         System.out.println("-".repeat(tableWidth));
-        // Print table headers
+        //print table headers. %- means align text to the left, s means string.
         System.out.printf("| %-"+nameColLength+"s | %-"+authorColLength+"s | %-"+yearColLength+"s | %-"+stockColLength+"s | %-"+borrowColLength+"s |\n",
             "Name", "Author", "Year", "Stock", "Borrowed");
+        //the line below the headers and above the book info. using .repeat to print the boarder.
         System.out.println("|" + "-".repeat(nameColLength+2) + "|" + "-".repeat(authorColLength+2) + "|" +
             "-".repeat(yearColLength+2) + "|" + "-".repeat(stockColLength+2) + "|" + "-".repeat(borrowColLength+2) + "|");
 
-        // print out the book data
+        // print out the book data below the headers, d is for int, s for string, %- to align text at left.
         for (int i = 0; i < nameAndAuthor.length; i++) {
             System.out.printf("| %-"+nameColLength+"s | %-"+authorColLength+"s | %-"+yearColLength+"d | %-"+stockColLength+"d | %-"+borrowColLength+"d |\n",
                 nameAndAuthor[i][0], nameAndAuthor[i][1], publishStockBorrow[i][0], publishStockBorrow[i][1], publishStockBorrow[i][2]);
         }
     }
-    /* Search books by name */
+    /**
+     * Search books by name 
+     * linear search
+     * when found, put into new temporary arrays
+     * then call showBookshelf function to print out the table for the temporary arrays
+    */
     public static void searchBooks() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the name of the book you want to search for: ");
@@ -453,11 +494,16 @@ public class LibraryManagementSystem
         showBookshelf(matchedNameAndAuthor, matchedPublishStockBorrow);//using new arrays instead of the full array to show only founded books
     }
 
-    /* Borrow book function */
+    /**
+     * Borrow book function 
+     * changing stock if there is more stock
+     * tell user unavailable if stock and borrow both zero
+     * tell user all copies are borrowed if stock is zero but borrow is not.
+    */
     public static void borrowBook() {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the name of the book you want to borrow: ");
-        String bookName = input.nextLine().trim();
+        String bookName = input.nextLine().trim();//trim to remove extra spaces
 
         boolean bookFound = false;
         boolean authorMismatch = false;
@@ -466,7 +512,7 @@ public class LibraryManagementSystem
             if (nameAndAuthor[i][0].equalsIgnoreCase(bookName)) {//if found the name on the shelf
                 bookFound = true;
                 System.out.print("Enter the author's name: ");//to check if author also matchs
-                String authorName = input.nextLine().trim();
+                String authorName = input.nextLine().trim();//trim to remove extra spaces before and after
 
                 if (nameAndAuthor[i][1].equalsIgnoreCase(authorName)) {// Name and author both match
                     if (publishStockBorrow[i][1] > 0) {// means there is available copy
@@ -493,100 +539,86 @@ public class LibraryManagementSystem
             System.out.println("A book with this name exists, but the author does not match.");
         }
     }
-    /* show stats */
+    /**
+     * show stats 
+     * calculate totals
+     * print out max stock books
+     * print out min stock books
+     * print out avg year
+    */
     public static void showStatistics()//totals, min list and max list, avg publish year
     {
-        int totalBooksOnShelf = 0;
-        int totalBooksOwned = 0;
-        int minStock = publishStockBorrow[0][1];
+        int totalBooksOnShelf = 0;//this one will not include borrowed
+        int totalBooksOwned = 0;//this one will include borrowed
+        int minStock = publishStockBorrow[0][1];//first item in that array, just a temporary value. might change
         int maxStock = publishStockBorrow[0][1];
-        int[] years = new int[nameAndAuthor.length];
         String[] maxStockBooks = new String[nameAndAuthor.length];//if there are mulitple books that is max stock
         String[] minStockBooks = new String[nameAndAuthor.length];//if there are mulitple books that is min stock
         int yearCount = 0;
-        int maxCount = 0;//used as index for new arrays
-        int minCount = 0;//same as maxCount
-
-        for (int i = 0; i < nameAndAuthor.length; i++) {//for every book on the shelf
+        int maxCount = 0;//stores how much max stock book is there in the array, used for the for loop at the output part
+        int minCount = 0;//same as maxCount but for min.
+        double avgYear = 0;
+        for (int i = 0; i < nameAndAuthor.length; i++) {//for every book on the shelf,
             int stock = publishStockBorrow[i][1];
             int borrowed = publishStockBorrow[i][2];
             totalBooksOnShelf += stock;
             totalBooksOwned += stock + borrowed;//this one counts the borrowd book as well
+            
             // Find books with the maximum stock
             if (stock > maxStock) { // stock is the stock of the current book being assessed
                 maxStock = stock; // replace with new maximum stock
-                maxCount = 0; // Reset counter since a new max is found
-                maxStockBooks = new String[nameAndAuthor.length]; // Reset array to remove old values
+                maxCount = 0; //reset the counter if a new max is found, the counter is for later use. 
+                maxStockBooks = new String[nameAndAuthor.length]; //reset max array to remove old values
                 // Store the first book with the new max stock
-                maxStockBooks[maxCount] = nameAndAuthor[i][0] + " by " + nameAndAuthor[i][1];
+                maxStockBooks[maxCount] = nameAndAuthor[i][0] + " by " + nameAndAuthor[i][1];// store name and author as one element in the string array.
                 maxCount++;
             } else if (stock == maxStock) {
-                // Store additional books with the same max stock
+                // Store additional books with the same max stock, eg. max is 5, but the current book also has 5 copies.
                 maxStockBooks[maxCount] = nameAndAuthor[i][0] + " by " + nameAndAuthor[i][1];
                 maxCount++;
             }
             // Find books with the minimum stock
             if (stock < minStock) {
                 minStock = stock;
-                minCount = 0; // Reset counter since a new min is found
-                minStockBooks = new String[nameAndAuthor.length]; // Reset array to remove old values
+                minCount = 0; //reset counter like how in max
+                minStockBooks = new String[nameAndAuthor.length]; //reset the array to clear the old values.
 
                 // Store the first book with this new min stock
                 minStockBooks[minCount] = nameAndAuthor[i][0] + " by " + nameAndAuthor[i][1];
-                minCount++; //move to next index
+                minCount++;
             } else if (stock == minStock) {
-                // Store additional books with the same min stock
+                //same as max, but for min
                 minStockBooks[minCount] = nameAndAuthor[i][0] + " by " + nameAndAuthor[i][1];
                 minCount++;
             }
-            //year
-            int bookYear = publishStockBorrow[i][0];//Get the year of the current book
-            years[yearCount] = bookYear;//Store the year in the years array
-            yearCount++;//to know how much different year values in total
-        }
-        // Calculate the average publication year
-        int totalYear = 0;
-        for (int j = 0; j < yearCount; j++) {
-            totalYear += years[j];//add up every elements in years[]
-        }
-        double avgYear;
-        if (yearCount > 0) {
-            avgYear = (double) totalYear / yearCount; //explicitly promote the operation to double
-        } else {
-            avgYear = 0;
+            //calculate the avgyear
+            avgYear += publishStockBorrow[i][0];// this is not yet average. will do the dividing later.
+            yearCount++;//to know how much different year values in total, so we can divide avgYear by this later.
         }
         // Display Statistics
         System.out.println("\n"+"-".repeat(tableWidth));//boarder
         System.out.println("Library Statistics");//title
-        System.out.println("Total books on shelf (excluding borrowed): " + totalBooksOnShelf);
-        System.out.println("Total books owned (including borrowed): " + totalBooksOwned);
-        String maxStockBooksStr = "";
-        if (maxCount == 1) {
-            maxStockBooksStr = maxStockBooks[0];//if there is only one max, just assign right away
-        } else {
-            for (int i = 0; i < maxCount; i++) {//if multiple max exist
-                if (i > 0) maxStockBooksStr += ", ";
-                maxStockBooksStr += maxStockBooks[i];
-            }
+        System.out.println("Total books on shelf (excluding borrowed): " + totalBooksOnShelf);//total 1
+        System.out.println("Total books owned (including borrowed): " + totalBooksOwned);//total 2 with borrow
+        System.out.println("The following book(s) has the most copies of " + maxStock+" book(s): ");
+        for (int i=0;i<maxCount;i++){
+            System.out.println(maxStockBooks[i]);
         }
-        String minStockBooksStr = "";
-        if (minCount == 1) {
-            minStockBooksStr = minStockBooks[0];//same as max
-        } else {
-            for (int i = 0; i < minCount; i++) {//if multiple min exist
-                if (i > 0) minStockBooksStr += ", ";
-                minStockBooksStr += minStockBooks[i];
-            }
+        System.out.println("The following book(s) has the fewest copies of " + minStock+" book(s): ");
+        for (int i=0;i<minCount;i++){
+            System.out.println(minStockBooks[i]);
         }
-        System.out.println("Book(s) with the maximum stock (" + maxStock + " copies): " + maxStockBooksStr);
-        System.out.println("Book(s) with the minimum stock (" + minStock + " copies): " + minStockBooksStr);
-        System.out.printf("Average publication year: %.2f\n", avgYear);//not printing out all the decimal places
+        System.out.printf("Average publication year: %.2f\n", avgYear/yearCount);//using printf to manage decimal places
     }
-    /* menu */
-    public static void showMenu()
+    /**
+     * menu 
+     * show all the choices
+     * call the function base on user choice.
+    */
+    public static void showMenu()//the main panel for the user.
     {
         Scanner input=new Scanner(System.in);
-        boolean Running=true;//this is a flag
+        boolean Running=true;//this is a flag, when true we want to keep printing the menu when one operation is done. 
         while(Running){
             System.out.println("-".repeat(tableWidth));
             System.out.print("\n");
@@ -599,7 +631,7 @@ public class LibraryManagementSystem
             System.out.println("Input 'quit' to deactivate the management system");
             System.out.print("User input: ");
             String usrInput=input.nextLine().trim();//no need for type safe because we are reading Line
-            switch(usrInput){ //using switch case instead of if else if because the logic here fits better
+            switch(usrInput){ //using switch case instead of if else if because the logic here fits better, no need for else if espectially
                 case "1":
                     addBooks();
                     break;
@@ -620,15 +652,15 @@ public class LibraryManagementSystem
                     break;
                 case "quit":
                     System.out.println("Are you sure you want to quit the program? Your data will not be saved. (yes/no)");
-                    if(input.nextLine().equalsIgnoreCase("yes")){
+                    if(input.nextLine().equalsIgnoreCase("yes")){//other inputs such as no, we don't explicitly consider them.
                         System.out.println("Thank you for using the Library Management System. Have a nice day.");
                         Running=false;
-                        break;    
+                        break;
                     }
                     break;
                 default:
                     System.out.println("Invalid input, try again");
-                    break;
+                    break;//get out to print a new menu
             }
         }
     }
